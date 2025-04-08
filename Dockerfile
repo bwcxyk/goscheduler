@@ -1,4 +1,4 @@
-FROM golang:1.15-alpine as builder
+FROM golang:1.21-alpine as builder
 
 RUN apk update \
     && apk add --no-cache git ca-certificates make bash yarn nodejs
@@ -16,7 +16,7 @@ RUN git clone https://github.com/gaggad/goscheduler.git \
     && make statik \
     && CGO_ENABLED=0 make goscheduler
 
-FROM alpine:3.12
+FROM alpine:3.21
 
 RUN apk add --no-cache ca-certificates tzdata \
     && addgroup -S app \
